@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, redirect } from "react-router-dom";
 
 import ProfilePage from "./pages/Platform/ProfilePage";
 
@@ -7,12 +7,16 @@ import PlatformLayout from "./layouts/PlatformLayout";
 
 export const router = createBrowserRouter([
 	{
+		path: "/",
+		loader: () => redirect("/auth"),
+	},
+	{
 		path: "/auth",
 		element: <AuthPage />,
 	},
 	{
 		path: "/platform",
-        element: <PlatformLayout/>,
+		element: <PlatformLayout />,
 		children: [
 			{
 				path: "home",

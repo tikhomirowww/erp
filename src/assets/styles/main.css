@@ -8,16 +8,29 @@
     }
 }
 
-.flex-middle {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
 ::-webkit-scrollbar {
 	display: none;
 }
 
 input:focus {
 	outline: none;
+}
+
+
+.flex-middle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.active-menu-link {
+    background: #F9FAFC;
+}
+
+.active-menu-link span {
+    color: #3560FA;
+}
+
+.active-menu-link path {
+    fill: #3560FA;
 }

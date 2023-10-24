@@ -103,7 +103,7 @@ export default function AuthPage() {
 					</div>
 					<button
 						type="submit"
-						className={`cursor-default text-center px-4 py-2.5 leading-[125%] font-semibold text-[#EFF2FF] rounded-2xl w-full ${
+						className={`cursor-default text-center px-4 py-2.5 leading-[125%] font-semibold text-light rounded-2xl w-full ${
 							formik.values.email &&
 							formik.values.code &&
 							formik.values.captcha

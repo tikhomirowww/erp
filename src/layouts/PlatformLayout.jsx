@@ -1,10 +1,11 @@
-import { Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import Icon from "../components/Icon";
+import clsx from "clsx";
 
 export default function PlatformLayout() {
 	return (
 		<div className="flex gap-3 items-start bg-[#F9FAFC] w-screen min-h-screen p-3">
-			<nav className="bg-white shadow-darken max-w-[260px] rounded-3xl p-5">
+			<nav className="bg-white shadow-darken max-w-[265px] rounded-3xl p-5 flex flex-col gap-1">
 				{[
 					{
 						title: "Главная",
@@ -35,10 +36,21 @@ export default function PlatformLayout() {
 						link: "news",
 					},
 				].map(({ title, link }) => (
-					<div className="py-2 flex items-center gap-2">
+					<NavLink
+						to={`/platform/${link}`}
+						className={({ isActive }) =>
+							clsx(
+								"py-2 px-3 flex items-center gap-2 cursor-pointer rounded-xl hover:bg-light transition-colors",
+								{
+									"active-menu-link": isActive,
+								},
+							)
+						}>
 						<Icon name={link + "Page"} />
-						{title}
-					</div>
+						<span className="text-[#505154] font-medium leading-[125%]">
+							{title}
+						</span>
+					</NavLink>
 				))}
 			</nav>
 			<div className="shadow-darken bg-white p-5 rounded-3xl grow">

@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        @apply text-dark;
+    }
+}
+
+.flex-middle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+::-webkit-scrollbar {
+	display: none;
+}
+
+input:focus {
+	outline: none;
+}

@@ -61,7 +61,7 @@ export default function AuthPage() {
 							formik.handleSubmit();
 						}
 					}}
-					className="p-5 rounded-3xl shadow-[0_16px_64px_0_rgba(168,168, 168,0.15)] bg-white max-w-[320px]">
+					className="p-5 rounded-3xl shadow-darken bg-white max-w-[320px]">
 					<h1 className="font-bold leading-[125%] text-center">
 						Авторизация
 					</h1>

@@ -3,8 +3,8 @@ import Icon from "../components/Icon";
 
 export default function PlatformLayout() {
 	return (
-		<div className="bg-[#F9FAFC] w-screen min-h-screen">
-			<nav>
+		<div className="flex gap-3 items-start bg-[#F9FAFC] w-screen min-h-screen p-3">
+			<nav className="bg-white shadow-darken max-w-[260px] rounded-3xl p-5">
 				{[
 					{
 						title: "Главная",
@@ -35,13 +35,15 @@ export default function PlatformLayout() {
 						link: "news",
 					},
 				].map(({ title, link }) => (
-					<div>
+					<div className="py-2 flex items-center gap-2">
 						<Icon name={link + "Page"} />
 						{title}
 					</div>
 				))}
 			</nav>
-			<Outlet />
+			<div className="shadow-darken bg-white p-5 rounded-3xl grow">
+				<Outlet />
+			</div>
 		</div>
 	);
 }

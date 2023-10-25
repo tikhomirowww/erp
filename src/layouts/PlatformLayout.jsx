@@ -1,11 +1,14 @@
 import { NavLink, Outlet } from "react-router-dom";
-import Icon from "../components/Icon";
 import clsx from "clsx";
+
+import Icon from "../components/Icon";
+
+import Decor_2 from "../assets/images/decor-2.png";
 
 export default function PlatformLayout() {
 	return (
-		<div className="flex gap-3 items-start bg-[#F9FAFC] w-screen min-h-screen p-3">
-			<nav className="bg-white shadow-darken max-w-[265px] rounded-3xl p-5 flex flex-col gap-1">
+		<div className="flex gap-3 items-stretch bg-[#F9FAFC] w-screen min-h-screen p-3 lg:flex-col">
+			<nav className="bg-white self-start shadow-darken max-w-[265px] rounded-3xl p-5 flex flex-col gap-1 lg:flex-row lg:max-w-none lg:w-full lg:justify-between md:p-1.5 md:gap-0 md:rounded-xl">
 				{[
 					{
 						title: "Главная",
@@ -20,7 +23,7 @@ export default function PlatformLayout() {
 						link: "metrics",
 					},
 					{
-						title: "Пользователи и роли",
+						title: "Юзеры",
 						link: "users",
 					},
 					{
@@ -40,21 +43,28 @@ export default function PlatformLayout() {
 						to={`/platform/${link}`}
 						className={({ isActive }) =>
 							clsx(
-								"py-2 px-3 flex items-center gap-2 cursor-pointer rounded-xl hover:bg-light transition-colors",
+								"py-2 px-3 flex items-center gap-2 cursor-pointer rounded-xl hover:bg-light transition-colors lg:flex-col md:rounded-lg md:gap-1 sm:px-1.5",
 								{
 									"active-menu-link": isActive,
 								},
 							)
 						}>
 						<Icon name={link + "Page"} />
-						<span className="text-[#505154] font-medium leading-[125%]">
+						<span className="text-secondaryDark font-medium leading-[125%] md:text-[10px] sm:hidden">
 							{title}
 						</span>
 					</NavLink>
 				))}
 			</nav>
-			<div className="shadow-darken bg-white p-5 rounded-3xl grow">
-				<Outlet />
+			<div className="shadow-darken bg-white p-5 rounded-3xl grow relative md:rounded-xl">
+				<img
+					src={Decor_2}
+					alt="Декор"
+					className="absolute bottom-0 right-0"
+				/>
+				<div className="relative z-10">
+					<Outlet />
+				</div>
 			</div>
 		</div>
 	);

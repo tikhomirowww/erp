@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 @layer base {
-    html {
-        @apply text-dark;
-    }
+	html {
+		@apply text-dark;
+	}
 }
 
 ::-webkit-scrollbar {
@@ -16,7 +16,6 @@ input:focus {
 	outline: none;
 }
 
-
 .flex-middle {
 	display: flex;
 	align-items: center;
@@ -24,13 +23,20 @@ input:focus {
 }
 
 .active-menu-link {
-    background: #F9FAFC;
+	background: #f9fafc;
 }
 
 .active-menu-link span {
-    color: #3560FA;
+	color: #3560fa;
 }
 
 .active-menu-link path {
-    fill: #3560FA;
+	fill: #3560fa;
+}
+
+.gradient-green-blue-text {
+	background: linear-gradient(261deg, #24e19d -22.5%, #2ebfdf 98.38%);
+	background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 }

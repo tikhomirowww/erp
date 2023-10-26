@@ -8,7 +8,7 @@ import Decor_2 from "../assets/images/decor-2.png";
 export default function PlatformLayout() {
 	return (
 		<div className="flex gap-3 items-stretch bg-[#F9FAFC] w-screen min-h-screen p-3 lg:flex-col">
-			<nav className="bg-white self-start shadow-darken max-w-[265px] rounded-3xl p-5 flex flex-col gap-1 lg:flex-row lg:max-w-none lg:w-full lg:justify-between md:p-1.5 md:gap-0 md:rounded-xl">
+			<nav className="bg-white self-start shadow-darken max-w-[265px] w-full rounded-3xl p-5 flex flex-col gap-1 lg:flex-row lg:max-w-none lg:justify-between md:p-1.5 md:gap-0 md:rounded-xl">
 				{[
 					{
 						title: "Главная",

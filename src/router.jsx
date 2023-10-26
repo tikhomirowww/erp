@@ -1,9 +1,12 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
 
-import ProfilePage from "./pages/Platform/ProfilePage";
-
-import AuthPage from "./pages/AuthPage";
 import PlatformLayout from "./layouts/PlatformLayout";
+
+import ProfilePage from "./pages/Platform/ProfilePage";
+import AuthPage from "./pages/AuthPage";
+import NewsPage from "./pages/Platform/NewsPage";
+import CreateNewsPage from "./pages/Platform/CreateNewsPage";
+import EditNewsPage from "./pages/Platform/EditNews";
 
 export const router = createBrowserRouter([
 	{
@@ -39,6 +42,15 @@ export const router = createBrowserRouter([
 			},
 			{
 				path: "news",
+				element: <NewsPage />,
+			},
+			{
+				path: "news/create",
+				element: <CreateNewsPage />,
+			},
+			{
+				path: "news/edit",
+				element: <EditNewsPage />,
 			},
 		],
 	},

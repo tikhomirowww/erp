@@ -15,7 +15,7 @@ export default function ProgressBar({
 					<p className="text-secondaryDark font-bold leading-[125%]">
 						{label}
 					</p>
-					<div className="w-[350px] rounded-xl bg-[#EAEBED] h-1 md:w-full">
+					<div className="w-[350px] rounded-xl bg-secondaryLight h-1 md:w-full">
 						<div
 							className="bg-[linear-gradient(260deg,#14F010_-209.77%,#D0EBCF_97.96%)] rounded-xl h-full"
 							style={{

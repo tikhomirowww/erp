@@ -12,8 +12,18 @@
 	display: none;
 }
 
-input:focus {
+input:focus, textarea:focus {
 	outline: none;
+}
+
+textarea {
+    resize: none;
+}
+
+.react-datepicker-wrapper {
+    z-index: 5;
+    position: relative;
+    width: 100%;
 }
 
 .flex-middle {

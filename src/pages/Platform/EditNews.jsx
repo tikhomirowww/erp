@@ -1,8 +1,6 @@
 import Input from "./../../components/Input";
 import Button from "./../../components/Button";
 
-import Banner_1 from "./../../assets/images/articles/banner-1.jpg";
-
 export default function EditNewsPage() {
 	return (
 		<form className="max-w-[730px]">
@@ -18,7 +16,7 @@ export default function EditNewsPage() {
 					</label>
 					<img
 						className="rounded-sm my-2 max-w-[160px]"
-						src={Banner_1}
+						src={"/images/articles/banner-1.jpg"}
 						alt="Миниатюра загруженного изображения"
 					/>
 					<button className="px-1 py-0.5  text-sm font-medium leading-[16px] text-negative rounded hover:text-secondaryNegative hover:bg-[#FFECED] transition-colors">

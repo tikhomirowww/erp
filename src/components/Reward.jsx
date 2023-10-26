@@ -136,7 +136,7 @@ export default function Reward({ type, width, height, isInactive }) {
 				)}
 				<img
 					className="max-w-[70%] max-h-[70%] absolute"
-					src={`./../src/assets/images/jewelries/${
+					src={`/images/jewelries/${
 						type.split("/")[1]
 					}.png`}
 					alt="Драгоценный камень"

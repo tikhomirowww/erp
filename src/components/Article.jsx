@@ -1,7 +1,4 @@
-import User from "./../assets/images/user.jpg";
-
 export default function Article({ title, create_date, text, banner }) {
-	console.log(text);
 	return (
 		<article>
 			<h3 className="text-dark max-w-[546px] text-2xl font-bold leading-[28px]">
@@ -12,7 +9,7 @@ export default function Article({ title, create_date, text, banner }) {
 			</p>
 			<img
 				className="rounded-sm"
-				src={`./../src/assets/images/articles/${banner}.jpg`}
+				src={`/images/articles/${banner}.jpg`}
 				alt="Баннер"
 			/>
 			<p className="my-6 max-w-[864px] font-medium leading-[125%] text-secondaryDark whitespace-pre-line">
@@ -45,19 +42,19 @@ export default function Article({ title, create_date, text, banner }) {
 					<div
 						className="w-[32px] h-[32px] rounded-full"
 						style={{
-							background: `url(${User}) no-repeat center / cover`,
+							background: `url("/images/user.jpg") no-repeat center / cover`,
 						}}
 					/>
                     <div
 						className="w-[32px] h-[32px] rounded-full -ml-4"
 						style={{
-							background: `url(${User}) no-repeat center / cover`,
+							background: `url("/images/user.jpg") no-repeat center / cover`,
 						}}
 					/>
                     <div
 						className="w-[32px] h-[32px] rounded-full -ml-4"
 						style={{
-							background: `url(${User}) no-repeat center / cover`,
+							background: `url("/images/user.jpg") no-repeat center / cover`,
 						}}
 					/>
 				</div>

@@ -3,8 +3,6 @@ import clsx from "clsx";
 
 import Icon from "../components/Icon";
 
-import Decor_2 from "../assets/images/decor-2.png";
-
 export default function PlatformLayout() {
 	return (
 		<div className="flex gap-3 items-stretch bg-[#F9FAFC] w-screen min-h-screen p-3 lg:flex-col">
@@ -58,7 +56,7 @@ export default function PlatformLayout() {
 			</nav>
 			<div className="shadow-darken bg-white p-5 rounded-3xl grow relative md:rounded-xl">
 				<img
-					src={Decor_2}
+					src={"/images/decor-2.png"}
 					alt="Декор"
 					className="absolute bottom-0 right-0"
 				/>

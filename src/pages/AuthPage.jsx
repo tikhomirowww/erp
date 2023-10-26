@@ -2,9 +2,6 @@ import { useFormik } from "formik";
 
 import Input from "./../components/Input";
 
-import decor_1 from "./../assets/images/decor-1.png";
-import captcha from "./../assets/images/captcha.png";
-
 export default function AuthPage() {
 	const validate = (values) => {
 		const errors = {};
@@ -46,7 +43,7 @@ export default function AuthPage() {
 		<section className="w-screen min-h-screen bg-[#F3F5FB] relative">
 			<img
 				className="absolute block max-h-full max-w-full"
-				src={decor_1}
+				src={"/images/decor-1.png"}
 				alt="Декор"
 			/>
 			<div className="flex-middle min-h-screen relative z-10 ">
@@ -88,7 +85,7 @@ export default function AuthPage() {
 							value={formik.values.code}
 							onBlur={formik.handleBlur}
 						/>
-						<img src={captcha} />
+						<img src={"/images/captcha.png"} alt="Каптча"/>
 						<Input
 							additionalClasses={
 								formik.errors.captcha &&

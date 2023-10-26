@@ -2,8 +2,6 @@ import ProgressBar from "../../components/ProgressBar";
 import Reward from "../../components/Reward";
 import UserInfoRow from "../../components/UserInfoRow";
 
-import User from "./../../assets/images/user.jpg";
-
 export default function ProfilePage() {
 	return (
 		<section className="flex items-start gap-[100px] xl:gap-[56px] md:flex-col md:items-stretch">
@@ -12,7 +10,7 @@ export default function ProfilePage() {
 					<div
 						className="w-[100px] h-[100px] rounded-xl"
 						style={{
-							background: `url(${User}) no-repeat center / cover`,
+							background: `url("/images/user.jpg") no-repeat center / cover`,
 						}}
 					/>
 					<div className="flex gap-6 items-center mt-3 mb-2 xl:flex-col xl:items-start xl:gap-2">

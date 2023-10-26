@@ -1,6 +1,5 @@
 {
 	"rewrites": [
-		{ "source": "/(.*)", "destination": "/" },
-		{ "source": "/platform/:match*", "destination": "/" }
+		{ "source": "/(.*)", "destination": "/" }
 	]
 }

@@ -1,7 +1,6 @@
 {
 	"rewrites": [
 		{ "source": "/(.*)", "destination": "/" },
-		{ "source": "/platform/(.*)", "destination": "/" },
-        { "source": "/platform/news/(.*)", "destination": "/" }
+		{ "source": "/platform/:match*", "destination": "/" }
 	]
 }

@@ -5,6 +5,7 @@ import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 export default function Input({
+    errorBorderAndText,
 	isMultiline,
 	isUploadImage,
 	isUploadDocument,
@@ -28,8 +29,7 @@ export default function Input({
 				!isDatepicker && (
 					<input
 						className={clsx(
-							`px-3 py-[15px] bg-white border border-[#C8C9CC] rounded-2xl font-semibold text-sm leading-4 text-dark w-full placeholder:text-gray`,
-							additionalClasses,
+							`px-3 py-[15px] bg-white border rounded-2xl font-semibold text-sm leading-4  w-full placeholder:text-gray focus:border-blue focus:shadow-focusInput`, errorBorderAndText || "text-dark border-secondaryGray ",
 						)}
 						{...args}
 					/>
@@ -37,7 +37,7 @@ export default function Input({
 			{isMultiline && (
 				<textarea
 					className={clsx(
-						`px-3 py-[15px] bg-white border border-[#C8C9CC] rounded-2xl font-semibold text-sm leading-4 text-dark w-full placeholder:text-gray h-[220px]`,
+						`px-3 py-[15px] bg-white border border-secondaryGray rounded-2xl font-semibold text-sm leading-4 text-dark w-full placeholder:text-gray h-[220px] focus:border-blue focus:shadow-focusInput`,
 						additionalClasses,
 					)}
 					{...args}
@@ -109,7 +109,7 @@ export default function Input({
 						placeholderText="Выбрать"
 						selected={startDate}
 						onChange={(date) => setStartDate(date)}
-						className="pr-3 pl-10 h-[48px] bg-white border border-[#C8C9CC] rounded-2xl font-semibold text-sm leading-4 text-dark w-full placeholder:text-gray"
+						className="pr-3 pl-10 h-[48px] bg-white border border-secondaryGray rounded-2xl font-semibold text-sm leading-4 text-dark w-full placeholder:text-gray"
 					/>
 				</div>
 			)}

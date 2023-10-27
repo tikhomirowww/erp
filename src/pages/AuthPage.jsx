@@ -64,7 +64,7 @@ export default function AuthPage() {
 					</h1>
 					<div className="my-8 flex flex-col gap-5">
 						<Input
-							additionalClasses={
+							errorBorderAndText={
 								formik.errors.email &&
 								"border-negative text-negative"
 							}
@@ -75,7 +75,7 @@ export default function AuthPage() {
 							onBlur={formik.handleBlur}
 						/>
 						<Input
-							additionalClasses={
+							errorBorderAndText={
 								formik.errors.code &&
 								"border-negative text-negative"
 							}
@@ -87,7 +87,7 @@ export default function AuthPage() {
 						/>
 						<img src={"/images/captcha.png"} alt="Каптча"/>
 						<Input
-							additionalClasses={
+							errorBorderAndText={
 								formik.errors.captcha &&
 								"border-negative text-negative"
 							}

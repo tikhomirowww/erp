@@ -7,6 +7,8 @@ import AuthPage from "./pages/AuthPage";
 import NewsPage from "./pages/Platform/NewsPage";
 import CreateNewsPage from "./pages/Platform/CreateNewsPage";
 import EditNewsPage from "./pages/Platform/EditNews";
+import ReportsPage from "./pages/Platform/ReportsPage";
+import ReportPage from "./pages/Platform/ReportPage";
 
 export const router = createBrowserRouter([
 	{
@@ -36,6 +38,11 @@ export const router = createBrowserRouter([
 			},
 			{
 				path: "reports",
+				element: <ReportsPage />,
+			},
+            {
+				path: "reports/:id",
+				element: <ReportPage />,
 			},
 			{
 				path: "periods",

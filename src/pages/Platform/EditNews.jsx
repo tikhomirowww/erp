@@ -27,7 +27,7 @@ export default function EditNewsPage() {
 			<div className="flex sm:flex-wrap items-center gap-6">
                 <Button className={"mr-[80px] md:mr-0 sm:order-3"} text={"Удалить новость"} isNegative/>
 				<Button text={"Отмена"} />
-				<Button text={"Опубликовать"} isFilling />
+				<Button text={"Сохранить"} isFilling />
 			</div>
 		</form>
 	);

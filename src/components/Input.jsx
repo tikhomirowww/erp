@@ -36,8 +36,12 @@ export default function Input({
 				)}
 			{isMultiline && (
 				<textarea
+                onKeyUp={(e) => {
+                    e.currentTarget.style.height = "1px";
+                    e.currentTarget.style.height = (5 + e.currentTarget.scrollHeight)+"px";
+                }}  
 					className={clsx(
-						`px-3 py-[15px] bg-white border border-secondaryGray rounded-2xl font-semibold text-sm leading-4 text-dark w-full placeholder:text-gray h-[220px] focus:border-blue focus:shadow-focusInput`,
+						`px-3 py-[15px] bg-white border border-secondaryGray rounded-2xl font-semibold text-sm leading-4 text-dark w-full placeholder:text-gray min-h-[220px] focus:border-blue focus:shadow-focusInput overflow-hidden`,
 						additionalClasses,
 					)}
 					{...args}

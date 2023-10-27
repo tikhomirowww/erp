@@ -40,7 +40,7 @@ export default function ProfilePage() {
 						canDelete
 					/>
 					<UserInfoRow
-						label="Логин"
+						label="Email"
 						text="constantinopol_1312@mail.ru"
 					/>
 				</ul>

@@ -2,7 +2,7 @@ import clsx from "clsx";
 
 import { useNavigate } from "react-router-dom";
 
-import DonutDiagram from "../../components/DonutDiagram";
+import CircularProgressbar from "../../components/CircularProgressbar";
 
 export default function ReportsPage() {
 	const navigate = useNavigate();
@@ -10,19 +10,19 @@ export default function ReportsPage() {
 	return (
 		<section>
 			<div className="flex gap-2.5 justify-between md:flex-wrap">
-				<DonutDiagram
+				<CircularProgressbar
 					activeColor="#00B808"
 					label="Средний результат за периоды"
 					percent="95"
 					additionalClasses="basis-1/3 md:basis-[100%]"
 				/>
-				<DonutDiagram
+				<CircularProgressbar
 					activeColor="#E1D033"
 					label="Результаты за текущий период"
 					percent="75"
 					additionalClasses="basis-1/3 md:basis-[100%]"
 				/>
-				<DonutDiagram
+				<CircularProgressbar
 					activeColor="#F7343D"
 					label="Результат на недельной итерации"
 					percent="60"

@@ -30,6 +30,9 @@ export default function HomePage() {
                 </div>
                     <TableCategories />
                 </div>
+                <div className="w-8 h-8 bg-dark fixed bottom-4 right-4 rounded-full flex-middle cursor-pointer" onClick={() => setIsAdmin(!isAdmin)}>
+                    <div className={`w-5 h-5 rounded-full ${isAdmin ? 'bg-green-500' : 'bg-red-500'}`}/>
+                </div>
             </section>
         );
     } else {
@@ -119,8 +122,10 @@ export default function HomePage() {
                     </div>
                     <TableCategories />
                 </div>
+                <div className="w-8 h-8 bg-dark fixed bottom-4 right-4 rounded-full flex-middle cursor-pointer" onClick={() => setIsAdmin(!isAdmin)}>
+                    <div className={`w-5 h-5 rounded-full ${isAdmin ? 'bg-green-500' : 'bg-red-500'}`}/>
+                </div>
             </section>
         );
     }
-	
 }

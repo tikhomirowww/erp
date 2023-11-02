@@ -5,7 +5,7 @@ import Icon from "../components/Icon";
 
 export default function PlatformLayout() {
 	return (
-		<div className="flex gap-3 items-start bg-[#F9FAFC] w-screen min-h-screen p-3 lg:flex-col">
+		<div className="flex gap-3 items-start  bg-[#F9FAFC] w-screen min-h-screen p-3 lg:flex-col">
 			<nav className="bg-white shadow-darken max-w-[265px] w-full rounded-3xl p-5 flex flex-col gap-1 lg:flex-row lg:max-w-none lg:justify-between md:p-1.5 md:gap-0 md:rounded-xl">
 				{[
 					{
@@ -54,7 +54,7 @@ export default function PlatformLayout() {
 					</NavLink>
 				))}
 			</nav>
-			<div className="shadow-darken bg-white p-5 rounded-3xl grow relative md:rounded-xl">
+			<div className="shadow-darken bg-white p-5 rounded-3xl grow w-full relative md:rounded-xl max-w-full overflow-hidden">
 				<img
 					src={"/images/decor-2.png"}
 					alt="Декор"

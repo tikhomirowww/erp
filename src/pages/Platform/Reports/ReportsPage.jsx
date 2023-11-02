@@ -2,7 +2,7 @@ import clsx from "clsx";
 
 import { useNavigate } from "react-router-dom";
 
-import CircularProgressbar from "../../components/CircularProgressbar";
+import CircularProgressBarBlock from "../../../components/ProgressBarBlocks/CircularProgressBarBlock";
 
 export default function ReportsPage() {
 	const navigate = useNavigate();
@@ -10,19 +10,19 @@ export default function ReportsPage() {
 	return (
 		<section>
 			<div className="flex gap-2.5 justify-between md:flex-wrap">
-				<CircularProgressbar
+				<CircularProgressBarBlock
 					activeColor="#00B808"
 					label="Средний результат за периоды"
 					percent="95"
 					additionalClasses="basis-1/3 md:basis-[100%]"
 				/>
-				<CircularProgressbar
+				<CircularProgressBarBlock
 					activeColor="#E1D033"
 					label="Результаты за текущий период"
 					percent="75"
 					additionalClasses="basis-1/3 md:basis-[100%]"
 				/>
-				<CircularProgressbar
+				<CircularProgressBarBlock
 					activeColor="#F7343D"
 					label="Результат на недельной итерации"
 					percent="60"
@@ -39,7 +39,7 @@ export default function ReportsPage() {
 						"Средний результат за периоды",
 						"Результаты за текущий период",
 						"В сравнении с общекомандными",
-					].map((head) => (
+					].map(head => (
 						<div
 							className={clsx(
 								"text-secondaryDark text-xs font-bold leading-[16px] px-2 py-1 flex items-center",
@@ -82,9 +82,9 @@ export default function ReportsPage() {
 						results_for_current_period: 16,
 						in_comparison_with_team: 16,
 					},
-				].map((row) => (
+				].map(row => (
 					<div className="h-[68px] flex items-center border-b border-secondaryGray md:w-[900px]">
-						{Object.keys(row).map((key) => (
+						{Object.keys(row).map(key => (
 							<div
 								className={clsx(
 									"text-xs font-medium leading-[16px] px-2 py-1 flex items-center",

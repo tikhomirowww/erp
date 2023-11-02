@@ -11,18 +11,34 @@ export default function Input({
 	isUploadDocument,
 	isDatepicker,
 	label,
+    miniLabel,
+    isCenterText,
 	additionalClasses,
+    isLittle,
+    isChoiceDate,
 	...args
 }) {
 	const [startDate, setStartDate] = useState(null);
 
 	return (
-		<div>
+		<div className={`relative ${isLittle && 'max-w-[88px]'}`}>
 			{label && (
 				<label className="text-secondaryDark font-bold leading-[125%] mb-2 block">
 					{label}
 				</label>
 			)}
+            {miniLabel && (
+				<label className="text-gray font-semibold leading-[18px] mb-2 block text-sm">
+					{miniLabel}
+				</label>
+			)}
+            {
+                isChoiceDate && (
+                    <svg className="absolute top-0 translate-y-1/2 left-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M9 2C9 1.44772 8.55228 1 8 1C7.44772 1 7 1.44772 7 2V3H3C2.44772 3 2 3.44772 2 4V20C2 20.5523 2.44772 21 3 21H21C21.5523 21 22 20.5523 22 20V4C22 3.44772 21.5523 3 21 3H17V2C17 1.44772 16.5523 1 16 1C15.4477 1 15 1.44772 15 2V3H9V2ZM20 9V5H17V6C17 6.55228 16.5523 7 16 7C15.4477 7 15 6.55228 15 6V5H9V6C9 6.55228 8.55228 7 8 7C7.44772 7 7 6.55228 7 6V5H4V9H20ZM4 11H20V19H4V11Z" fill="#292A2F"/>
+</svg>
+                )
+            }
 			{!isMultiline &&
 				!isUploadImage &&
 				!isUploadDocument &&
@@ -30,6 +46,10 @@ export default function Input({
 					<input
 						className={clsx(
 							`px-3 py-[15px] bg-white border rounded-2xl font-semibold text-sm leading-4  w-full placeholder:text-gray focus:border-blue focus:shadow-focusInput`, errorBorderAndText || "text-dark border-secondaryGray ",
+                            {
+                                'text-center': isCenterText
+                            },
+                            [isChoiceDate ? 'pl-10' : '']
 						)}
 						{...args}
 					/>

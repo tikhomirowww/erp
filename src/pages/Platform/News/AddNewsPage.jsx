@@ -1,7 +1,7 @@
-import Button from "../../components/Button";
-import Input from "./../../components/Input";
+import Button from "../../../components/Button";
+import Input from "../../../components/Input";
 
-export default function CreateNewsPage() {
+export default function AddNewsPage() {
 	return (
 		<form className="max-w-[730px]">
 			<h3 className="text-dark text-2xl font-bold leading-[28px]">

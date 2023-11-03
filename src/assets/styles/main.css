@@ -108,3 +108,27 @@ textarea {
 .toggleSwitch__label:active:after {
 	width: 20px;
 }
+
+.calendarBall-default::after, .calendarBall-positive::after, .calendarBall-negative::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
+    bottom: 8px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+}
+
+.calendarBall-default::after {
+    background-color: #C8C9CC;
+}
+
+.calendarBall-positive::after {
+    background-color: #00B808;
+}
+
+.calendarBall-negative::after {
+    background-color: #F7343D;
+}

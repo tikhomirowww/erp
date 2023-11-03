@@ -1,6 +1,13 @@
 import clsx from "clsx";
+import { useState } from "react";
+import ModalWindow from "../../components/ModalWindow";
+import Button from "../../components/Button";
+import Dropdown from "../../components/Dropdown";
+import LineProgressBarBlock from "../../components/ProgressBarBlocks/LineProgressBarBlock";
 
 export default function TableCategories() {
+	const [popup, setPopup] = useState(false);
+
 	const head = [
 		"Категория",
 		"№",
@@ -90,83 +97,168 @@ export default function TableCategories() {
 	];
 
 	return (
-		<div className="best-scrollbar xxl:overflow-x-auto xxl:max-w-full xxl:w-full">
-			<div className="flex items-center xxl:w-[1101px]">
-				{head.map((item, index) => (
+		<>
+			<div className="best-scrollbar xxl:overflow-x-auto xxl:max-w-full xxl:w-full">
+				<div className="flex items-center xxl:w-[1101px]">
+					{head.map((item, index) => (
+						<div
+							className={clsx(
+								"text-secondaryDark text-xs font-bold leading-[16px] h-11 flex items-center px-2",
+								{
+									"w-20 border-r border-secondaryGray":
+										index === 0,
+									"w-[35px] justify-center": index === 1,
+									"w-[126px]": index === 3,
+									"w-[85px]": [4, 5].includes(index),
+									"w-[78px]": index === 7,
+									"w-[102px]": [2, 6, 8, 9, 10, 11].includes(
+										index,
+									),
+								},
+							)}>
+							{item}
+						</div>
+					))}
+				</div>
+				<div className="xxl:w-[1101px]">
+					{data.map((row, indexRow) => (
+						<div className="flex">
+							{row.map((item, indexItem) => (
+								<div
+									className={clsx(
+										"h-[68px] px-2 flex items-center",
+										{
+											"w-20 border-r border-secondaryGray":
+												indexItem === 0,
+											"w-[35px] justify-center":
+												indexItem === 1,
+											"w-[126px]": indexItem === 3,
+											"w-[85px]": [4, 5].includes(
+												indexItem,
+											),
+											"w-[78px]": indexItem === 7,
+											"w-[102px]": [
+												2, 6, 8, 9, 10, 11,
+											].includes(indexItem),
+											"border-secondaryGray border-b":
+												indexRow === data.length - 1 ||
+												data[indexRow + 1][0] !== "" ||
+												indexItem !== 0,
+											"text-blue": indexItem === 11,
+											"text-dark":
+												indexItem !== 11 &&
+												indexItem !== 6 &&
+												indexItem !== 10,
+											"text-xl font-bold":
+												indexItem === 6 ||
+												indexItem === 10,
+											"text-xs font-medium leading-[16px]":
+												[
+													0, 1, 2, 3, 4, 5, 7, 8, 9,
+													11,
+												].includes(indexItem),
+											"text-yellow":
+												(indexItem === 6 ||
+													indexItem === 10) &&
+												Number(item.slice(0, -1)) <
+													95 &&
+												Number(item.slice(0, -1)) > 80,
+											"text-negative":
+												(indexItem === 6 ||
+													indexItem === 10) &&
+												Number(item.slice(0, -1)) <= 80,
+											"text-positive":
+												(indexItem === 6 ||
+													indexItem === 10) &&
+												Number(item.slice(0, -1)) >= 95,
+										},
+									)}>
+									{indexItem !== 11 &&
+										(indexItem === 6 || indexItem === 10
+											? item.replace(".", ",")
+											: item)}
+									{indexItem === 11 && (
+										<span
+											className="hover:opacity-80 transition-opacity cursor-pointer"
+											onClick={() => setPopup(true)}>
+											{item}
+										</span>
+									)}
+								</div>
+							))}
+						</div>
+					))}
+				</div>
+			</div>
+			<ModalWindow trigger={popup}>
+				<div className="flex items-center justify-between">
+					<Button text="Сравнить периоды" isFilling />
 					<div
-						className={clsx(
-							"text-secondaryDark text-xs font-bold leading-[16px] h-11 flex items-center px-2",
-							{
-								"w-20 border-r border-secondaryGray":
-									index === 0,
-								"w-[35px] justify-center": index === 1,
-								"w-[126px]": index === 3,
-								"w-[85px]": [4, 5].includes(index),
-								"w-[78px]": index === 7,
-								"w-[102px]": [2, 6, 8, 9, 10, 11].includes(
-									index,
-								),
-							},
-						)}>
-						{item}
+						className="flex
+                            justify-end items-center">
+						<div
+							className="hover:opacity-90 cursor-pointer transition-opacity px-1.5 py-0.5 flex items-center gap-1"
+							onClick={() => setPopup(false)}>
+							<span className="font-medium leading-[125%] text-blue">
+								Закрыть
+							</span>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="20"
+								height="20"
+								viewBox="0 0 20 20"
+								fill="none">
+								<path
+									fill-rule="evenodd"
+									clip-rule="evenodd"
+									d="M14.7142 5.28607C15.0396 5.61151 15.0396 6.13914 14.7142 6.46458L11.1786 10.0002L14.7142 13.5357C15.0396 13.8611 15.0396 14.3888 14.7142 14.7142C14.3887 15.0397 13.8611 15.0397 13.5356 14.7142L10.0001 11.1787L6.4646 14.7142C6.13917 15.0396 5.61153 15.0396 5.28609 14.7142C4.96066 14.3887 4.96066 13.8611 5.28609 13.5356L8.82159 10.0002L5.28607 6.46464C4.96063 6.1392 4.96063 5.61156 5.28607 5.28613C5.61151 4.96069 6.13914 4.96069 6.46458 5.28613L10.0001 8.82164L13.5357 5.28607C13.8611 4.96063 14.3887 4.96063 14.7142 5.28607Z"
+									fill="#3560FA"
+								/>
+							</svg>
+						</div>
 					</div>
-				))}
-			</div>
-			<div className="xxl:w-[1101px]">
-				{data.map((row, indexRow) => (
-					<div className="flex">
-						{row.map((item, indexItem) => (
-							<div
-								className={clsx(
-									"h-[68px] px-2 flex items-center",
-									{
-										"w-20 border-r border-secondaryGray":
-											indexItem === 0,
-										"w-[35px] justify-center":
-											indexItem === 1,
-										"w-[126px]": indexItem === 3,
-										"w-[85px]": [4, 5].includes(indexItem),
-										"w-[78px]": indexItem === 7,
-										"w-[102px]": [
-											2, 6, 8, 9, 10, 11,
-										].includes(indexItem),
-										"border-secondaryGray border-b":
-											indexRow === data.length - 1 ||
-											data[indexRow + 1][0] !== "" ||
-											indexItem !== 0,
-										"text-blue": indexItem === 11,
-										"text-dark":
-											indexItem !== 11 &&
-											indexItem !== 6 &&
-											indexItem !== 10,
-										"text-xl font-bold":
-											indexItem === 6 || indexItem === 10,
-										"text-xs font-medium leading-[16px]": [
-											0, 1, 2, 3, 4, 5, 7, 8, 9, 11,
-										].includes(indexItem),
-										"text-yellow":
-											(indexItem === 6 ||
-												indexItem === 10) &&
-											Number(item.slice(0, -1)) < 95 &&
-											Number(item.slice(0, -1)) > 80,
-										"text-negative":
-											(indexItem === 6 ||
-												indexItem === 10) &&
-											Number(item.slice(0, -1)) <= 80,
-										"text-positive":
-											(indexItem === 6 ||
-												indexItem === 10) &&
-											Number(item.slice(0, -1)) >= 95,
-									},
-								)}>
-								{indexItem === 6 || indexItem === 10
-									? item.replace(".", ",")
-									: item}
-							</div>
-						))}
-					</div>
-				))}
-			</div>
-		</div>
+				</div>
+				<Dropdown additionalClasses="mt-6 mb-5" />
+				<div className="flex gap-1 mb-5 xl:grid xl:gap-2">
+					<LineProgressBarBlock
+						percent={25}
+						label="Выполнение на недельной итерации"
+						additionalClasses="basis-1/6"
+					/>
+					<LineProgressBarBlock
+						percent={54.3}
+						label="Общий результат"
+						opinion="Сумма результатов всех категорий"
+						additionalClasses="basis-1/6"
+					/>
+					<LineProgressBarBlock
+						percent={105}
+						label="Результат в сравнении с общекомандным"
+						decreasePercent={8}
+						additionalClasses="basis-1/6"
+					/>
+					<LineProgressBarBlock
+						percent={51}
+						label="Выручка млн. руб."
+						opinion="Самый низкий показатель (% выполнения)"
+						increasePercent={5}
+						isNegative
+						additionalClasses="basis-1/6"
+					/>
+					<LineProgressBarBlock
+						percent={108.7}
+						label="Операционные затраты"
+						opinion="Самый высокий показатель (% выполнения)"
+						additionalClasses="basis-1/6"
+					/>
+					<LineProgressBarBlock
+						percent={90}
+						label="Результат за текущий период"
+						additionalClasses="basis-1/6"
+					/>
+				</div>
+				<TableCategories />
+			</ModalWindow>
+		</>
 	);
 }

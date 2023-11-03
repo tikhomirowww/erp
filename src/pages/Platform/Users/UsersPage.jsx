@@ -15,7 +15,7 @@ export default function UsersPage() {
 				text="Добавить"
 				isFilling
 				icon="plus"
-				onClick={() => navigate("/platform/user/add")}
+				onClick={() => navigate("/platform/user/edit")}
 			/>
 			<TableUsers />
 		</section>

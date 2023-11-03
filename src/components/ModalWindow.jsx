@@ -1,8 +1,8 @@
 export default function ModalWindow({ trigger, onClose, children }) {
 	if (trigger) {
 		return (
-			<div className="fixed top-0 bottom-0 left-0 right-0 bg-dark/50 w-screen min-h-screen flex-middle p-5">
-				<div className="bg-white rounded-3xl p-5 max-w-[1140px] w-full">
+			<div className="fixed top-0 left-0 bg-dark/50 w-full h-full p-5 flex-middle overflow-auto best-scrollbar">
+				<div className="bg-white rounded-3xl p-5 max-w-[1140px] w-full my-auto">
 					{onClose && (
 						<div
 							className="flex

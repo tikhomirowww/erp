@@ -24,7 +24,7 @@ export default function NotFound() {
 				<p className="text-lg uppercase font-extrabold">
 					Страница не найдена
 				</p>
-				<p className="mt-6 text-sm">
+				<p className="mt-6 text-sm text-center">
 					через {timer} секунд вы будете перенаправлены на страницу авторизации
 				</p>
 			</div>

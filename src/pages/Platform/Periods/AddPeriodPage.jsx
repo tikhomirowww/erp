@@ -146,7 +146,7 @@ export default function AddPeriodPage() {
 				)}
 				{currentTab === "staff" && (
 					<>
-						<div className="flex justify-between mdd:flex-col mdd:gap-10">
+						<div className="flex gap-16 mdd:flex-col mdd:gap-10 mb-6">
 							{["Максим", "Пётр", "Сергей"].map(firstName => (
 								<div>
 									<p className="mb-3 font-bold leading-[125%] text-secondaryDark">

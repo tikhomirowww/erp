@@ -2,8 +2,8 @@ import clsx from "clsx";
 
 export default function TableMetrics() {
 	return (
-		<div className="mt-6 mdd:overflow-x-auto md:pb-3 best-scrollbar mdd:max-w-full">
-			<div className="flex justify-between mdd:w-[1000px]">
+		<div className="mt-6 xxl:overflow-x-auto md:pb-3 best-scrollbar xxl:max-w-full">
+			<div className="flex justify-between xxl:w-[1100px]">
 				{[
 					"№",
 					"Категория метрики",
@@ -18,16 +18,16 @@ export default function TableMetrics() {
 						className={clsx(
 							"text-secondaryDark text-xs font-bold leading-[16px] px-2 py-1 flex items-center",
 							{
-								"w-[55px] justify-center": index === 0,
-							},
-							{
-								"w-[89px]": index === 1,
-							},
-							{
-								"w-[200px]": index === 2,
-							},
-							{
-                                "w-[150px]": !([0,1,2].includes(index))
+                                "basis-[3%] justify-center": index === 0,
+                            },
+                            {
+                                "basis-[7%]": index === 1,
+                            },
+                            {
+                                "basis-[15%]": index === 2,
+                            },
+                            {
+                                "basis-[15%]": !([0,1,2].includes(index))
                             }
 						)}>
 						{head}
@@ -66,23 +66,23 @@ export default function TableMetrics() {
 					activity: "Не активно",
 				},
 			].map(row => (
-				<div className="h-[68px] flex items-center border-b border-secondaryGray mdd:w-[1000px]">
+				<div className="h-[68px] flex items-center border-b border-secondaryGray xxl:w-[1100px]">
 					{Object.keys(row).map((key, index) => (
 						<div
 							className={clsx(
 								"font-medium leading-[16px] px-2 py-1 flex items-center",
 								[index === 2 ? "text-blue text-sm" : "text-dark text-xs"],
                                 {
-                                    "w-[55px] justify-center": index === 0,
+                                    "basis-[3%] justify-center": index === 0,
                                 },
                                 {
-                                    "w-[89px]": index === 1,
+                                    "basis-[7%]": index === 1,
                                 },
                                 {
-                                    "w-[200px]": index === 2,
+                                    "basis-[15%]": index === 2,
                                 },
                                 {
-                                    "w-[150px]": !([0,1,2].includes(index))
+                                    "basis-[15%]": !([0,1,2].includes(index))
                                 }
 							)}>
 							<span className={clsx({

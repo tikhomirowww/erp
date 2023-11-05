@@ -27,6 +27,8 @@ import AddPeriodPage from "./pages/Platform/Periods/AddPeriodPage";
 import UsersPage from "./pages/Platform/Users/UsersPage";
 import EditUserPage from "./pages/Platform/Users/EditUserPage";
 
+import NotFound from "./pages/NotFound";
+
 export const router = createBrowserRouter([
 	{
 		path: "/",
@@ -52,21 +54,21 @@ export const router = createBrowserRouter([
 				path: "metrics",
 				element: <MetricsPage />,
 			},
-            {
+			{
 				path: "metric/add",
 				element: <AddMetricPage />,
 			},
-            {
+			{
 				path: "metric/edit",
 				element: <EditMetricPage />,
 			},
 			{
 				path: "users",
-                element: <UsersPage/>
+				element: <UsersPage />,
 			},
-            {
+			{
 				path: "user/edit",
-                element: <EditUserPage/>
+				element: <EditUserPage />,
 			},
 			{
 				path: "reports",
@@ -78,11 +80,11 @@ export const router = createBrowserRouter([
 			},
 			{
 				path: "periods",
-                element: <PeriodsPage/>
+				element: <PeriodsPage />,
 			},
-            {
+			{
 				path: "period/add",
-                element: <AddPeriodPage/>
+				element: <AddPeriodPage />,
 			},
 			{
 				path: "news",
@@ -97,5 +99,9 @@ export const router = createBrowserRouter([
 				element: <EditNewsPage />,
 			},
 		],
+	},
+	{
+		path: "*",
+		element: <NotFound />,
 	},
 ]);

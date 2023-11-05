@@ -1,12 +1,21 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useHref } from "react-router-dom";
 import clsx from "clsx";
 
 import Icon from "../components/Icon";
+import { useEffect, useState } from "react";
 
 export default function PlatformLayout() {
+	const href = useHref();
+
+	const [canGrowHeight, setCanGrowHeight] = useState(false);
+
+	useEffect(() => {
+		setCanGrowHeight((href.split("/")[2] === "profile") || (href.split("/")[2] === "metrics"));
+	}, [href]);
+
 	return (
-		<div className="flex gap-3 items-start  bg-[#F9FAFC] w-screen min-h-screen p-3 lg:flex-col">
-			<nav className="bg-white shadow-darken max-w-[265px] w-full rounded-3xl p-5 flex flex-col gap-1 lg:flex-row lg:max-w-none lg:justify-between md:p-1.5 md:gap-0 md:rounded-xl">
+		<div className={clsx('flex gap-3 bg-[#F9FAFC] w-screen min-h-screen p-3 lg:flex-col', !canGrowHeight && 'items-start')}>
+			<nav className="bg-white shadow-darken max-w-[265px] w-full rounded-3xl p-5 flex flex-col gap-1 lg:flex-row lg:max-w-none lg:justify-between md:p-1.5 md:gap-0 md:rounded-xl self-start">
 				{[
 					{
 						title: "Главная",
@@ -54,7 +63,7 @@ export default function PlatformLayout() {
 					</NavLink>
 				))}
 			</nav>
-			<div className="shadow-darken bg-white p-5 rounded-3xl grow w-full relative md:rounded-xl max-w-full overflow-hidden">
+			<div className={clsx("shadow-darken bg-white p-5 rounded-3xl grow w-full relative md:rounded-xl max-w-full overflow-hidden", !canGrowHeight && 'self-start')}>
 				<img
 					src={"/images/decor-2.png"}
 					alt="Декор"

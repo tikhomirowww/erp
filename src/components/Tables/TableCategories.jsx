@@ -99,28 +99,26 @@ export default function TableCategories() {
 	return (
 		<>
 			<div className="best-scrollbar xxl:overflow-x-auto xxl:max-w-full xxl:w-full">
-				<div className="flex items-center xxl:w-[1101px]">
+				<div className="flex items-center xxl:w-[1200px]">
 					{head.map((item, index) => (
 						<div
 							className={clsx(
 								"text-secondaryDark text-xs font-bold leading-[16px] h-11 flex items-center px-2",
 								{
-									"w-20 border-r border-secondaryGray":
+									"w-[78px] border-r border-secondaryGray":
 										index === 0,
-									"w-[35px] justify-center": index === 1,
-									"w-[126px]": index === 3,
-									"w-[85px]": [4, 5].includes(index),
-									"w-[78px]": index === 7,
-									"w-[102px]": [2, 6, 8, 9, 10, 11].includes(
-										index,
-									),
+                                        "w-[32px] justify-center":
+												index === 1,
+                                        "basis-[9%]": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11].includes(
+                                            index,
+                                        ),
 								},
 							)}>
 							{item}
 						</div>
 					))}
 				</div>
-				<div className="xxl:w-[1101px]">
+				<div className="w-full xxl:w-[1200px]">
 					{data.map((row, indexRow) => (
 						<div className="flex">
 							{row.map((item, indexItem) => (
@@ -128,18 +126,13 @@ export default function TableCategories() {
 									className={clsx(
 										"h-[68px] px-2 flex items-center",
 										{
-											"w-20 border-r border-secondaryGray":
+											"w-[78px] border-r border-secondaryGray":
 												indexItem === 0,
-											"w-[35px] justify-center":
+											"w-[32px] justify-center":
 												indexItem === 1,
-											"w-[126px]": indexItem === 3,
-											"w-[85px]": [4, 5].includes(
+											"basis-[9%]": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11].includes(
 												indexItem,
 											),
-											"w-[78px]": indexItem === 7,
-											"w-[102px]": [
-												2, 6, 8, 9, 10, 11,
-											].includes(indexItem),
 											"border-secondaryGray border-b":
 												indexRow === data.length - 1 ||
 												data[indexRow + 1][0] !== "" ||

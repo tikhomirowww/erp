@@ -1,7 +1,7 @@
 export default function Article({ title, create_date, text, banner }) {
 	return (
 		<article>
-			<h3 className="text-dark max-w-[546px] text-2xl font-bold leading-[28px]">
+			<h3 className="text-dark max-w-[562px] text-2xl font-bold leading-[28px]">
 				{title}
 			</h3>
 			<p className="mt-3 mb-6 text-gray text-sm font-medium leading-[18px]">

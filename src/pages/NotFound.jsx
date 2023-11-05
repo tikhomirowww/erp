@@ -13,7 +13,7 @@ export default function NotFound() {
 
 	useEffect(() => {
 		if (timer <= 0) {
-			navigate(-1);
+			navigate('/auth');
 		}
 	}, [timer]);
 
@@ -25,8 +25,7 @@ export default function NotFound() {
 					Страница не найдена
 				</p>
 				<p className="mt-6 text-sm">
-					через {timer} секунд вы будете перенаправлены на предыдущую
-					страницу
+					через {timer} секунд вы будете перенаправлены на страницу авторизации
 				</p>
 			</div>
 		</section>

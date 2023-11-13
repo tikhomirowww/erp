@@ -8,7 +8,7 @@ export default {
 		screens: {
 			sm: { max: "500px" },
 			md: { max: "800px" },
-            mdd: {max: "978px"},
+			mdd: { max: "978px" },
 			lg: { max: "1068px" },
 			xl: { max: "1200px" },
 			xxl: { max: "1400px" },
@@ -27,6 +27,7 @@ export default {
 			},
 			fontFamily: {
 				sans: ["Manrope", "sans-serif"],
+				lilita: ["Lilita One", "sans-serif"],
 			},
 			colors: {
 				dark: "#292A2F",
@@ -40,7 +41,7 @@ export default {
 				gray: "#939599",
 				secondaryGray: "#C8C9CC",
 				positive: "#00B808",
-                yellow: "#E1D033"
+				yellow: "#E1D033",
 			},
 		},
 	},

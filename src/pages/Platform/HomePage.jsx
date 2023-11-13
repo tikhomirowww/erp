@@ -8,7 +8,7 @@ import { useState } from "react";
 export default function HomePage() {
     const [isAdmin, setIsAdmin] = useState(false)
 
-    if (isAdmin) {
+    if (!isAdmin) {
         return (
             <section>
                 <div>

@@ -6,7 +6,7 @@ export default function ProgressBar({
 	label,
 	currentValue,
 	maxValue,
-	extraItems
+	extraItems,
 }) {
 	return (
 		<div className="flex flex-col gap-4">
@@ -31,59 +31,52 @@ export default function ProgressBar({
 			<div
 				className={clsx({
 					"flex gap-5": extraItems === "coins",
-                    "grid gap-2 grid-cols-4 max-w-[324px]": extraItems === "jewelries"
+					"grid gap-2 grid-cols-4 max-w-[324px]":
+						extraItems === "jewelries",
 				})}>
 				{extraItems === "coins" ? (
 					<>
-						<Reward type="coin/10" width={100} height={100} />
-						<Reward type="coin/50" width={100} height={100} />
+						<Reward
+							type="coin/10"
+							width={100}
+							height={100}
+							isInactive={!(currentValue >= 10)}
+						/>
+						<Reward
+							type="coin/50"
+							width={100}
+							height={100}
+							isInactive={!(currentValue >= 50)}
+						/>
 						<Reward
 							type="coin/100"
 							width={100}
 							height={100}
-							isInactive
+							isInactive={!(currentValue >= 100)}
 						/>
 					</>
 				) : (
-					<>
-						<Reward type="jewelry/crystal" width={75} height={75} />
-						<Reward type="jewelry/diamond" width={75} height={75} />
-						<Reward type="jewelry/citrine" width={75} height={75} />
-						<Reward type="jewelry/amethyst" width={75} height={75} />
-						<Reward type="jewelry/sapphire" width={75} height={75} />
-						<Reward type="jewelry/emerald" width={75} height={75} />
-						<Reward type="jewelry/agate" width={75} height={75} />
+					[
+						"crystal",
+						"diamond",
+						"citrine",
+						"amethyst",
+						"sapphire",
+						"emerald",
+						"agate",
+						"amber",
+						"garnet",
+						"spinel",
+						"topaz",
+						"ruby",
+					].map((stone, index) => (
 						<Reward
-							type="jewelry/amber"
+							type={`jewelry/${stone}`}
 							width={75}
 							height={75}
-							isInactive
+							isInactive={!(currentValue >= index + 1)}
 						/>
-						<Reward
-							type="jewelry/garnet"
-							width={75}
-							height={75}
-							isInactive
-						/>
-						<Reward
-							type="jewelry/spinel"
-							width={75}
-							height={75}
-							isInactive
-						/>
-						<Reward
-							type="jewelry/topaz"
-							width={75}
-							height={75}
-							isInactive
-						/>
-						<Reward
-							type="jewelry/ruby"
-							width={75}
-							height={75}
-							isInactive
-						/>
-					</>
+					))
 				)}
 			</div>
 		</div>

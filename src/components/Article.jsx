@@ -1,4 +1,6 @@
-export default function Article({ title, create_date, text, banner }) {
+import clsx from "clsx";
+
+export default function Article({ title, create_date, text, banner, likes }) {
 	return (
 		<article>
 			<h3 className="text-dark max-w-[562px] text-2xl font-bold leading-[28px]">
@@ -7,15 +9,21 @@ export default function Article({ title, create_date, text, banner }) {
 			<p className="mt-3 mb-6 text-gray text-sm font-medium leading-[18px]">
 				{create_date}
 			</p>
-			<img
-				className="rounded-sm"
-				src={`/images/articles/${banner}.jpg`}
-				alt="Баннер"
-			/>
+			{banner && banner !== "" ? (
+				<img
+					className="rounded-sm max-w-[400px] w-full h-full max-h-[320px] object-cover"
+					src={`${import.meta.env.VITE_HOST}/${banner}`}
+					alt="Баннер"
+				/>
+			) : (
+				<div className="rounded-sm max-w-[400px] w-full h-[320px] bg-secondaryDark/20" />
+			)}
 			<p className="my-6 max-w-[864px] font-medium leading-[125%] text-secondaryDark whitespace-pre-line">
 				{text}
 			</p>
-			<div className="px-3 py-2 inline-flex items-center gap-3 rounded-3xl bg-dark/10">
+			<div className={clsx(`px-3 py-2 inline-flex items-center gap-3 rounded-3xl bg-dark/10 cursor-pointer hover:bg-dark/20 transition-colors`, {
+                'pr-5': likes === 0
+            })}>
 				<div className="flex items-center gap-1">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -35,29 +43,29 @@ export default function Article({ title, create_date, text, banner }) {
 						/>
 					</svg>
 					<span className="text-dark font-semibold leading-[18px]">
-						6
+						{likes}
 					</span>
 				</div>
-				<div className="flex items-center">
+				{/* <div className="flex items-center">
 					<div
 						className="w-[32px] h-[32px] rounded-full"
 						style={{
 							background: `url("/images/user.jpg") no-repeat center / cover`,
 						}}
 					/>
-                    <div
+					<div
 						className="w-[32px] h-[32px] rounded-full -ml-4"
 						style={{
 							background: `url("/images/user.jpg") no-repeat center / cover`,
 						}}
 					/>
-                    <div
+					<div
 						className="w-[32px] h-[32px] rounded-full -ml-4"
 						style={{
 							background: `url("/images/user.jpg") no-repeat center / cover`,
 						}}
 					/>
-				</div>
+				</div> */}
 			</div>
 		</article>
 	);

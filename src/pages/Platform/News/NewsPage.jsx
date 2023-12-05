@@ -11,7 +11,7 @@ export default function NewsPage() {
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		get_news().then(res => {
+		get_news().then((res) => {
 			setNews(res.data);
 			setTimeout(() => {
 				setLoading(false);
@@ -24,16 +24,14 @@ export default function NewsPage() {
 			{loading ? (
 				<Loader loading={loading} />
 			) : news.length > 0 ? (
-				news.map(({ title, text, pub_date, image }, index) => (
+				news.map(({ title, text, pub_date, image, total_likes }, index) => (
 					<>
 						<Article
 							title={title}
-							create_date={new Date(
-								pub_date,
-							).toLocaleDateString()}
+							create_date={new Date(pub_date).toLocaleDateString()}
 							banner={image}
 							text={text}
-                            likes={0}
+							likes={total_likes}
 						/>
 						{news.length > 1 && index !== news.length - 1 && (
 							<div className="h-0.5 w-full bg-secondaryLight my-16" />

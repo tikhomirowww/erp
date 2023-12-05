@@ -7,11 +7,12 @@ import Reward from "../../components/Reward";
 import UserInfoRow from "../../components/UserInfoRow";
 import Loader from "../../components/Loader";
 
-import { get_user } from "../../utils/api";
+import { change_password, get_user } from "../../utils/api";
 
 import useLocalStorage from "../../hooks/useLocalStorage";
 
 import { ContextApp } from "../../Context";
+import toast from "react-hot-toast";
 
 export default function ProfilePage() {
 	const { setAuth } = useContext(ContextApp);
@@ -20,12 +21,22 @@ export default function ProfilePage() {
 
 	const [user, setUser] = useState(null);
 	const [loading, setLoading] = useState(true);
+	const [changingPassword, setChangingPassword] = useState({
+		state: false,
+		currentPassword: "",
+		newPassword: "",
+	});
 
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		get_user().then(res => {
+		get_user().then((res) => {
 			setUser(res.data);
+			setChangingPassword((prevState) => ({
+				...prevState,
+				newPassword: window.atob(authData.password),
+				currentPassword: window.atob(authData.password),
+			}));
 			setLoading(false);
 		});
 	}, []);
@@ -64,19 +75,22 @@ export default function ProfilePage() {
 								className="w-[100px] h-[100px] rounded-xl relative"
 								style={{
 									background: `url("/images/user.jpg") no-repeat center / cover`,
-								}}>
+								}}
+							>
 								<div
 									className="absolute bottom-[-5px] right-[-5px] w-7 h-7 bg-red-500 rounded-md flex-middle cursor-pointer hover:opacity-90 transition-opacity"
-									onClick={handleExit}>
+									onClick={handleExit}
+								>
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
 										width="24"
 										height="24"
 										viewBox="0 0 24 24"
-										fill="none">
+										fill="none"
+									>
 										<path
-											fill-rule="evenodd"
-											clip-rule="evenodd"
+											fillRule="evenodd"
+											clipRule="evenodd"
 											d="M9.707 2.40894C9 3.03594 9 4.18294 9 6.47594V17.5239C9 19.8169 9 20.9639 9.707 21.5909C10.414 22.2179 11.495 22.0299 13.657 21.6529L15.987 21.2469C18.381 20.8289 19.578 20.6199 20.289 19.7419C21 18.8629 21 17.5929 21 15.0519V8.94794C21 6.40794 21 5.13794 20.29 4.25894C19.578 3.38094 18.38 3.17194 15.986 2.75494L13.658 2.34794C11.496 1.97094 10.415 1.78294 9.708 2.40994L9.707 2.40894ZM12 10.1689C12.414 10.1689 12.75 10.5199 12.75 10.9529V13.0469C12.75 13.4799 12.414 13.8309 12 13.8309C11.586 13.8309 11.25 13.4799 11.25 13.0469V10.9529C11.25 10.5199 11.586 10.1689 12 10.1689Z"
 											fill="white"
 										/>
@@ -109,21 +123,14 @@ export default function ProfilePage() {
 											/>
 										)}
 									{user.days_without_skip >= 100 && (
-										<Reward
-											type="coin/100"
-											width={32}
-											height={32}
-										/>
+										<Reward type="coin/100" width={32} height={32} />
 									)}
 									{user.medals.length > 0 && (
 										<Reward
 											type={`jewelry/${
 												user.medals.length >= 12
 													? "ruby"
-													: MEDALS[
-															user.medals.length -
-																1
-													  ]
+													: MEDALS[user.medals.length - 1]
 											}`}
 											width={32}
 											height={32}
@@ -132,29 +139,80 @@ export default function ProfilePage() {
 								</div>
 							</div>
 							<div className="text-white text-xs font-medium leading-[16px] px-2 py-1 rounded bg-dark inline-block">
-								Модератор
+								{user.role === "owner" ? "Владелец" : "Пользователь"}
 							</div>
 						</div>
 						<ul className="mt-8 flex flex-col gap-3">
-							<UserInfoRow
-								label="Дата рождения"
-								text="21.01.1990"
-							/>
-							<UserInfoRow label="Логин" text="constantinopol" />
+							<UserInfoRow label="Дата рождения" text="—" />
+							<UserInfoRow label="Логин" text={user.user} />
 							<UserInfoRow
 								label="Пароль"
-								text={window
-									.atob(authData.password)
-									.replace(/./g, "*")}
-								canChange
+								text={
+									changingPassword.state
+										? changingPassword.newPassword
+										: changingPassword.currentPassword.replace(
+												/./g,
+												"*",
+										  )
+								}
+								handleChange={
+									!changingPassword.state &&
+									(() => {
+										setChangingPassword((prevState) => ({
+											...prevState,
+											state: true,
+										}));
+									})
+								}
+								inputValue={changingPassword.newPassword}
+								onChange={(e) =>
+									setChangingPassword((prevState) => ({
+										...prevState,
+										newPassword: e.target.value,
+									}))
+								}
+								handleSave={
+									changingPassword.state &&
+									(() => {
+										if (changingPassword.newPassword.length >= 5) {
+											change_password("admin", "admin").then(
+												(res) => {
+													if (res?.status === 200) {
+														setAuthData({
+															...authData,
+															password: window.btoa(
+																changingPassword.newPassword,
+															),
+														});
+														setChangingPassword(
+															(prevState) => ({
+																...prevState,
+																state: false,
+																currentPassword:
+																	prevState.newPassword,
+															}),
+														);
+														toast.success(
+															"Пароль успешно изменён",
+														);
+													} else {
+														toast.error(
+															"Новый пароль слишком короткий",
+														);
+													}
+												},
+											);
+										} else {
+											toast.error("Новый пароль слишком короткий");
+										}
+									})
+								}
 							/>
-							{user.telegram_username && (
-								<UserInfoRow
-									label="Telegram"
-									text={`@${user.telegram_username}`}
-									canDelete
-								/>
-							)}
+							<UserInfoRow
+								label="Telegram"
+								text={user.telegram_username || "—"}
+								// handleDelete={user.telegram_username}
+							/>
 							<UserInfoRow label="Email" text={user.user} />
 						</ul>
 					</div>
@@ -172,11 +230,7 @@ export default function ProfilePage() {
 						<ProgressBar
 							label={"Выполненные планы за период"}
 							currentValue={user.medals.length}
-							maxValue={
-								user.medals.length > 12
-									? user.medals.length
-									: 12
-							}
+							maxValue={user.medals.length > 12 ? user.medals.length : 12}
 							extraItems={"jewelries"}
 						/>
 					</div>

@@ -8,7 +8,7 @@ import TableCategories from "./../Tables/TableCategories"
 
 import { useState } from "react";
 
-export default function TableUsers() {
+export default function TableUsers({data}) {
 	const [userPopup, setUserPopup] = useState(false);
 
 	const head = [
@@ -20,39 +20,6 @@ export default function TableUsers() {
 		"Роль",
 		"Активность",
 		"Действия",
-	];
-
-	const data = [
-		[
-			"1",
-			"Ахмадуллин Айрат",
-			["coin/100", "emerald"],
-			"94%",
-			"workwork_1@mail.ru",
-			"Модератор",
-			"Активен",
-			"",
-		],
-		[
-			"2",
-			"Ахмадуллин Айрат",
-			["coin/10", "emerald"],
-			"98%",
-			"workwork_1@mail.ru",
-			"Модератор",
-			"Активен",
-			"",
-		],
-		[
-			"3 ",
-			"Ахмадуллин Айрат",
-			["coin/50", "emerald"],
-			"54,7 %",
-			"workwork_1@mail.ru",
-			"Сотрудник",
-			"Не активен",
-			"",
-		],
 	];
 
 	return (
@@ -103,7 +70,7 @@ export default function TableUsers() {
 									)}
 									{indexItem === 2 && (
 										<div className="flex gap-1.5">
-											<Reward
+											{/*<Reward
 												type={item[0]}
 												width={32}
 												height={32}
@@ -112,7 +79,7 @@ export default function TableUsers() {
 												type={"jewelry/agate"}
 												width={32}
 												height={32}
-											/>
+											/>*/}
 										</div>
 									)}
 									{indexItem === 3 && (

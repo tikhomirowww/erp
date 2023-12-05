@@ -1,9 +1,36 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../../../components/Button";
 import TableUsers from "../../../components/Tables/TableUsers";
+import { useEffect, useState } from "react";
+import { get_all_users } from "../../../utils/api.js";
 
 export default function UsersPage() {
 	const navigate = useNavigate();
+
+	const [users, setUsers] = useState([]);
+
+	useEffect(() => {
+		get_all_users().then(({ data }) => {
+			console.log(data);
+			data.map(({ id, user, role, medals }) => {
+				setUsers((prev) => [
+					...prev,
+					[
+						id,
+						"Ахмадуллин Айрат",
+						[...medals],
+						"94%",
+						user,
+						{ owner: "Владелец", user: "Пользователь", admin: "Админ" }[
+							role
+						] || "Пользователь",
+						"Активен",
+						"",
+					],
+				]);
+			});
+		});
+	}, []);
 
 	return (
 		<section>
@@ -17,7 +44,7 @@ export default function UsersPage() {
 				icon="plus"
 				onClick={() => navigate("/platform/user/edit")}
 			/>
-			<TableUsers />
+			<TableUsers data={users} />
 		</section>
 	);
 }

@@ -1,15 +1,17 @@
-export default function ModalWindow({ trigger, onClose, children }) {
+export default function ModalWindow({ isWidthContent, trigger, onClose, children }) {
 	if (trigger) {
 		return (
 			<div className="fixed top-0 left-0 bg-dark/50 w-full h-full p-5 flex-middle overflow-auto best-scrollbar">
-				<div className="bg-white rounded-3xl p-5 max-w-[1140px] w-full my-auto">
+				<div className={`bg-white rounded-3xl p-5 max-w-[1140px] my-auto ${!isWidthContent && "w-full"}`}>
 					{onClose && (
 						<div
 							className="flex
-                            justify-end items-center">
+                            justify-end items-center"
+						>
 							<div
 								className="hover:opacity-90 cursor-pointer transition-opacity px-1.5 py-0.5 flex items-center gap-1"
-								onClick={onClose}>
+								onClick={onClose}
+							>
 								<span className="font-medium leading-[125%] text-blue">
 									Закрыть
 								</span>
@@ -18,7 +20,8 @@ export default function ModalWindow({ trigger, onClose, children }) {
 									width="20"
 									height="20"
 									viewBox="0 0 20 20"
-									fill="none">
+									fill="none"
+								>
 									<path
 										fill-rule="evenodd"
 										clip-rule="evenodd"
@@ -29,7 +32,7 @@ export default function ModalWindow({ trigger, onClose, children }) {
 							</div>
 						</div>
 					)}
-                    {children}
+					{children}
 				</div>
 			</div>
 		);

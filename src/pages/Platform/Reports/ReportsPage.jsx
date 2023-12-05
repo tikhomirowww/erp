@@ -104,7 +104,7 @@ export default function ReportsPage() {
 									})}
 									onClick={() => {
 										if (key === "fio") {
-											navigate(`${row["id"]}`);
+											navigate(`/report/${row["id"]}`);
 										}
 									}}>
 									{row[key]}

@@ -73,8 +73,11 @@ export default function AuthPage() {
 						login: window.btoa(values.email),
 						password: window.btoa(values.code),
 					});
-					setAuth("yes");
-					setTimeout(() => navigate("/platform/home"), 1000);
+					// setTimeout(() => navigate("/platform/home"), 1000);
+					setTimeout(() => {
+						setAuth("yes");
+						window.location.href = "/platform/home"
+					}, 1000);
 				} else if (res.response.status === 401 || res.response.data.status === 401) {
 					toast.error("Неверный логин или пароль");
 					formik.resetForm();

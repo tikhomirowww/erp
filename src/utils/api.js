@@ -28,15 +28,33 @@ export async function login(email, password) {
 		return response;
 	} catch (error) {
 		console.log(error);
-        return error
+		return error;
 	}
 }
 
 /* [USER PROFILE] */
 export async function get_user() {
 	try {
-		const response = await axios.get("profile");
-		return response;
+		return await axios.get("profile");
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+export async function change_password(current_password, new_password) {
+	try {
+		return await axios.post("profile/change_password", {
+			current_password,
+			new_password,
+		});
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+export async function get_all_users() {
+	try {
+		return await axios.get("profile/get_all_person");
 	} catch (error) {
 		console.log(error);
 	}
@@ -46,8 +64,7 @@ export async function get_user() {
 
 export async function get_news() {
 	try {
-		const response = await axios.get("news");
-		return response;
+		return await axios.get("news");
 	} catch (error) {
 		console.log(error);
 	}
@@ -78,6 +95,15 @@ export async function delete_news(news_id) {
 	try {
 		const response = await axios.delete(`news/delete-news/${news_id}`);
 		return response;
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+/* [PERIODS] */
+export async function get_periods() {
+	try {
+		return await axios.get("periods");
 	} catch (error) {
 		console.log(error);
 	}

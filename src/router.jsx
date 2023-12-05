@@ -75,7 +75,7 @@ export const router = createBrowserRouter([
 				element: <ReportsPage />,
 			},
 			{
-				path: "report",
+				path: "report/:id",
 				element: <ReportPage />,
 			},
 			{

@@ -10,7 +10,11 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use((config) => {
-	if (config.url.at(-1) !== "/" && !config.url.includes("change_password")) {
+	if (
+		config.url.at(-1) !== "/" &&
+		!config.url.includes("change_password") &&
+		!config.url.includes("goal")
+	) {
 		config.url += "/";
 	}
 	return config;

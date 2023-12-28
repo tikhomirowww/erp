@@ -1,12 +1,25 @@
 import clsx from "clsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ModalWindow from "../../components/ModalWindow";
 import Button from "../../components/Button";
 import Dropdown from "../../components/Dropdown";
 import LineProgressBarBlock from "../../components/ProgressBarBlocks/LineProgressBarBlock";
+import { get_results } from "../../utils/api";
 
 export default function TableCategories() {
 	const [popup, setPopup] = useState(false);
+
+	const [data, setData] = useState([]);
+
+	useEffect(() => {
+		get_results().then(({ data }) => {
+			setData(data);
+		});
+	}, []);
+
+	useEffect(() => {
+		console.log(data, "datadfgvhbjklj;v");
+	}, [data]);
 
 	const head = [
 		"Категория",
@@ -23,78 +36,78 @@ export default function TableCategories() {
 		"Ответственный",
 	];
 
-	const data = [
-		[
-			"Фин",
-			"1",
-			"Увеличить выручку",
-			"Выручка млн. руб.",
-			"5 433 965",
-			"5 000 000",
-			"94%",
-			"0,5",
-			"0,5",
-			"0,5",
-			"94%",
-			"Ахмадуллин Айрат",
-		],
-		[
-			"",
-			"2",
-			"Не превышать бюджет на опер. зат",
-			"Операционные атраты (OPEX)",
-			"5 433 965",
-			"5 000 000",
-			"95%",
-			"0,5",
-			"0,5",
-			"0,5",
-			"95%",
-			"Ахмадуллин Айрат",
-		],
-		[
-			"Клие",
-			"3",
-			"Не превышать бюджет на опер. зат",
-			"Операционные атраты (OPEX)",
-			"5 433 965",
-			"5 000 000",
-			"54.7%",
-			"0,5",
-			"0,5",
-			"0,5",
-			"54.7%",
-			"Ахмадуллин Айрат",
-		],
-		[
-			"Проц",
-			"4",
-			"Не превышать бюджет на опер. зат",
-			"Операционные атраты (OPEX)",
-			"5 433 965",
-			"5 000 000",
-			"84%",
-			"0,5",
-			"0,5",
-			"0,5",
-			"84%",
-			"Ахмадуллин Айрат",
-		],
-		[
-			"Ком",
-			"5",
-			"Не превышать бюджет на опер. зат",
-			"Операционные атраты (OPEX)",
-			"5 433 965",
-			"5 000 000",
-			"99%",
-			"0,5",
-			"0,5",
-			"0,5",
-			"99%",
-			"Ахмадуллин Айрат",
-		],
-	];
+	// const data = [
+	// 	[
+	// 		"Фин",
+	// 		"1",
+	// 		"Увеличить выручку",
+	// 		"Выручка млн. руб.",
+	// 		"5 433 965",
+	// 		"5 000 000",
+	// 		"94%",
+	// 		"0,5",
+	// 		"0,5",
+	// 		"0,5",
+	// 		"94%",
+	// 		"Ахмадуллин Айрат",
+	// 	],
+	// 	[
+	// 		"",
+	// 		"2",
+	// 		"Не превышать бюджет на опер. зат",
+	// 		"Операционные атраты (OPEX)",
+	// 		"5 433 965",
+	// 		"5 000 000",
+	// 		"95%",
+	// 		"0,5",
+	// 		"0,5",
+	// 		"0,5",
+	// 		"95%",
+	// 		"Ахмадуллин Айрат",
+	// 	],
+	// 	[
+	// 		"Клие",
+	// 		"3",
+	// 		"Не превышать бюджет на опер. зат",
+	// 		"Операционные атраты (OPEX)",
+	// 		"5 433 965",
+	// 		"5 000 000",
+	// 		"54.7%",
+	// 		"0,5",
+	// 		"0,5",
+	// 		"0,5",
+	// 		"54.7%",
+	// 		"Ахмадуллин Айрат",
+	// 	],
+	// 	[
+	// 		"Проц",
+	// 		"4",
+	// 		"Не превышать бюджет на опер. зат",
+	// 		"Операционные атраты (OPEX)",
+	// 		"5 433 965",
+	// 		"5 000 000",
+	// 		"84%",
+	// 		"0,5",
+	// 		"0,5",
+	// 		"0,5",
+	// 		"84%",
+	// 		"Ахмадуллин Айрат",
+	// 	],
+	// 	[
+	// 		"Ком",
+	// 		"5",
+	// 		"Не превышать бюджет на опер. зат",
+	// 		"Операционные атраты (OPEX)",
+	// 		"5 433 965",
+	// 		"5 000 000",
+	// 		"99%",
+	// 		"0,5",
+	// 		"0,5",
+	// 		"0,5",
+	// 		"99%",
+	// 		"Ахмадуллин Айрат",
+	// 	],
+	// ];
 
 	return (
 		<>
@@ -105,82 +118,80 @@ export default function TableCategories() {
 							className={clsx(
 								"text-secondaryDark text-xs font-bold leading-[16px] h-11 flex items-center px-2",
 								{
-									"w-[78px] border-r border-secondaryGray":
-										index === 0,
-                                        "w-[32px] justify-center":
-												index === 1,
-                                        "basis-[9%]": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11].includes(
-                                            index,
-                                        ),
+									"w-[78px] border-r border-secondaryGray": index === 0,
+									"w-[32px] justify-center": index === 1,
+									"basis-[9%]": [
+										2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
+									].includes(index),
 								},
-							)}>
+							)}
+						>
 							{item}
 						</div>
 					))}
 				</div>
 				<div className="w-full xxl:w-[1200px]">
-					{data.map((row, indexRow) => (
-						<div className="flex">
-							{row.map((item, indexItem) => (
-								<div
-									className={clsx(
-										"h-[68px] px-2 flex items-center",
-										{
-											"w-[78px] border-r border-secondaryGray":
-												indexItem === 0,
-											"w-[32px] justify-center":
-												indexItem === 1,
-											"basis-[9%]": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11].includes(
-												indexItem,
-											),
-											"border-secondaryGray border-b":
-												indexRow === data.length - 1 ||
-												data[indexRow + 1][0] !== "" ||
-												indexItem !== 0,
-											"text-blue": indexItem === 11,
-											"text-dark":
-												indexItem !== 11 &&
-												indexItem !== 6 &&
-												indexItem !== 10,
-											"text-xl font-bold":
-												indexItem === 6 ||
-												indexItem === 10,
-											"text-xs font-medium leading-[16px]":
-												[
-													0, 1, 2, 3, 4, 5, 7, 8, 9,
-													11,
+					{data.data &&
+						data.data.map((row, indexRow) => (
+							<div className="flex">
+								{/* {row.map((item, indexItem) => (
+									<div
+										className={clsx(
+											"h-[68px] px-2 flex items-center",
+											{
+												"w-[78px] border-r border-secondaryGray":
+													indexItem === 0,
+												"w-[32px] justify-center":
+													indexItem === 1,
+												"basis-[9%]": [
+													2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
 												].includes(indexItem),
-											"text-yellow":
-												(indexItem === 6 ||
-													indexItem === 10) &&
-												Number(item.slice(0, -1)) <
-													95 &&
-												Number(item.slice(0, -1)) > 80,
-											"text-negative":
-												(indexItem === 6 ||
-													indexItem === 10) &&
-												Number(item.slice(0, -1)) <= 80,
-											"text-positive":
-												(indexItem === 6 ||
-													indexItem === 10) &&
-												Number(item.slice(0, -1)) >= 95,
-										},
-									)}>
-									{indexItem !== 11 &&
-										(indexItem === 6 || indexItem === 10
-											? item.replace(".", ",")
-											: item)}
-									{indexItem === 11 && (
-										<span
-											className="hover:opacity-80 transition-opacity cursor-pointer"
-											onClick={() => setPopup(true)}>
-											{item}
-										</span>
-									)}
-								</div>
-							))}
-						</div>
-					))}
+												"border-secondaryGray border-b":
+													indexRow === data.length - 1 ||
+													data[indexRow + 1][0] !== "" ||
+													indexItem !== 0,
+												"text-blue": indexItem === 11,
+												"text-dark":
+													indexItem !== 11 &&
+													indexItem !== 6 &&
+													indexItem !== 10,
+												"text-xl font-bold":
+													indexItem === 6 || indexItem === 10,
+												"text-xs font-medium leading-[16px]": [
+													0, 1, 2, 3, 4, 5, 7, 8, 9, 11,
+												].includes(indexItem),
+												"text-yellow":
+													(indexItem === 6 ||
+														indexItem === 10) &&
+													Number(item.slice(0, -1)) < 95 &&
+													Number(item.slice(0, -1)) > 80,
+												"text-negative":
+													(indexItem === 6 ||
+														indexItem === 10) &&
+													Number(item.slice(0, -1)) <= 80,
+												"text-positive":
+													(indexItem === 6 ||
+														indexItem === 10) &&
+													Number(item.slice(0, -1)) >= 95,
+											},
+										)}
+									>
+										{indexItem !== 11 &&
+											(indexItem === 6 || indexItem === 10
+												? item.replace(".", ",")
+												: item)}
+										{indexItem === 11 && (
+											<span
+												className="hover:opacity-80 transition-opacity cursor-pointer"
+												onClick={() => setPopup(true)}
+											>
+												{item}
+											</span>
+										)}
+									</div>
+								))} */}
+							</div>
+						))}
 				</div>
 			</div>
 			<ModalWindow trigger={popup}>
@@ -188,10 +199,12 @@ export default function TableCategories() {
 					<Button text="Сравнить периоды" isFilling />
 					<div
 						className="flex
-                            justify-end items-center">
+                            justify-end items-center"
+					>
 						<div
 							className="hover:opacity-90 cursor-pointer transition-opacity px-1.5 py-0.5 flex items-center gap-1"
-							onClick={() => setPopup(false)}>
+							onClick={() => setPopup(false)}
+						>
 							<span className="font-medium leading-[125%] text-blue">
 								Закрыть
 							</span>
@@ -200,7 +213,8 @@ export default function TableCategories() {
 								width="20"
 								height="20"
 								viewBox="0 0 20 20"
-								fill="none">
+								fill="none"
+							>
 								<path
 									fill-rule="evenodd"
 									clip-rule="evenodd"

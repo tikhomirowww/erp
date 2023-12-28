@@ -7,19 +7,35 @@ import Reward from "../../components/Reward";
 import UserInfoRow from "../../components/UserInfoRow";
 import Loader from "../../components/Loader";
 
-import { change_password, get_user } from "../../utils/api";
+import { MdInsertPhoto } from "react-icons/md";
+import { RiLogoutBoxFill } from "react-icons/ri";
+
+import {
+	change_password,
+	change_photo,
+	edit_profile,
+	edit_role,
+	get_full_user,
+	// get_user,
+} from "../../utils/api";
 
 import useLocalStorage from "../../hooks/useLocalStorage";
 
 import { ContextApp } from "../../Context";
 import toast from "react-hot-toast";
+import { usePeriods } from "../../PeriodsContext";
 
 export default function ProfilePage() {
 	const { setAuth } = useContext(ContextApp);
 
 	const [authData, setAuthData] = useLocalStorage({}, "auth_data");
 
-	const [user, setUser] = useState(null);
+	// const [user, setUser] = useState(null);
+
+	const [test, setTest] = useState(null);
+
+	const [roleSwitch, setRoleSwitch] = useState(false);
+
 	const [loading, setLoading] = useState(true);
 	const [changingPassword, setChangingPassword] = useState({
 		state: false,
@@ -27,11 +43,37 @@ export default function ProfilePage() {
 		newPassword: "",
 	});
 
+	const [menu, setMenu] = useState(false);
+
+	const [newImage, setNewImage] = useState("");
+
+	const [selected, setSelected] = useState(null);
+
 	const navigate = useNavigate();
+
+	// console.log(window.atob(authData.password));
+
+	const { get_user, user } = usePeriods();
 
 	useEffect(() => {
 		get_user().then((res) => {
-			setUser(res.data);
+			// setUser(res.data);
+			setChangingPassword((prevState) => ({
+				...prevState,
+				newPassword: window.atob(authData.password),
+				currentPassword: window.atob(authData.password),
+			}));
+			setLoading(false);
+		});
+	}, [newImage]);
+
+	useEffect(() => {
+		console.log(user, "user");
+	}, [user]);
+
+	useEffect(() => {
+		get_full_user().then((res) => {
+			setTest(res.data);
 			setChangingPassword((prevState) => ({
 				...prevState,
 				newPassword: window.atob(authData.password),
@@ -50,6 +92,33 @@ export default function ProfilePage() {
 		}, 600);
 	};
 
+	const roles = [
+		{ value: "owner", title: "Владелец" },
+		{ value: "admin", title: "Администратор" },
+		{ value: "user", title: "Cотрудник" },
+	];
+
+	useEffect(() => {
+		{
+			user &&
+				(setSelected({
+					value: user.role,
+					title: [roles.find((item) => item.value === user.role).title][0],
+				}),
+				console.log(user.role));
+			console.log(selected, "sel");
+		}
+		// console.log(user.role);
+	}, [user]);
+
+	useEffect(() => {
+		console.log(selected, "selected");
+	}, [selected]);
+
+	useEffect(() => {
+		console.log(newImage, "newImage");
+	}, [newImage]);
+
 	const MEDALS = [
 		"crystal",
 		"diamond",
@@ -65,6 +134,11 @@ export default function ProfilePage() {
 		"ruby",
 	];
 
+	const handleStatus = (item) => {
+		setSelected(item);
+		edit_role(item.value);
+	};
+
 	return (
 		<section className="flex items-start gap-[100px] xl:gap-[56px] md:flex-col md:items-stretch">
 			{user ? (
@@ -72,33 +146,65 @@ export default function ProfilePage() {
 					<div>
 						<div>
 							<div
-								className="w-[100px] h-[100px] rounded-xl relative"
-								style={{
-									background: `url("/images/user.jpg") no-repeat center / cover`,
-								}}
+								onClick={() => setMenu(!menu)}
+								className="w-[100px] h-[100px] rounded-xl flex"
+								// style={{
+								// 	background: `url("/images/user.jpg") no-repeat center / cover`,
+								// }}
 							>
-								<div
-									className="absolute bottom-[-5px] right-[-5px] w-7 h-7 bg-red-500 rounded-md flex-middle cursor-pointer hover:opacity-90 transition-opacity"
-									onClick={handleExit}
-								>
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										width="24"
-										height="24"
-										viewBox="0 0 24 24"
-										fill="none"
-									>
-										<path
-											fillRule="evenodd"
-											clipRule="evenodd"
-											d="M9.707 2.40894C9 3.03594 9 4.18294 9 6.47594V17.5239C9 19.8169 9 20.9639 9.707 21.5909C10.414 22.2179 11.495 22.0299 13.657 21.6529L15.987 21.2469C18.381 20.8289 19.578 20.6199 20.289 19.7419C21 18.8629 21 17.5929 21 15.0519V8.94794C21 6.40794 21 5.13794 20.29 4.25894C19.578 3.38094 18.38 3.17194 15.986 2.75494L13.658 2.34794C11.496 1.97094 10.415 1.78294 9.708 2.40994L9.707 2.40894ZM12 10.1689C12.414 10.1689 12.75 10.5199 12.75 10.9529V13.0469C12.75 13.4799 12.414 13.8309 12 13.8309C11.586 13.8309 11.25 13.4799 11.25 13.0469V10.9529C11.25 10.5199 11.586 10.1689 12 10.1689Z"
-											fill="white"
-										/>
-										<path
-											d="M7.547 4.5C5.489 4.503 4.416 4.548 3.732 5.232C3 5.964 3 7.142 3 9.5V14.5C3 16.857 3 18.035 3.732 18.768C4.416 19.451 5.489 19.497 7.547 19.5C7.5 18.876 7.5 18.156 7.5 17.377V6.623C7.5 5.843 7.5 5.123 7.547 4.5Z"
-											fill="white"
-										/>
-									</svg>
+								<img
+									className="cursor-pointer"
+									src={`${
+										user.photo
+											? `http://62.113.113.125/${user.photo}`
+											: "/images/default-profile.png"
+									}`}
+									alt="testttttttt"
+								/>
+								<div className="relative ml-4">
+									{menu && (
+										<ul
+											className={`border-2 h-full transition-all  bottom-0 top-0 m-auto left-0 w-fit rounded-md cursor-pointer flex flex-col justify-around relative`}
+										>
+											<li
+												onClick={(e) => e.stopPropagation()}
+												className=" whitespace-nowrap w-full h-full hover:bg-slate-400 hover:text-white px-2 "
+											>
+												<label className="h-full w-full flex items-center">
+													<MdInsertPhoto
+														className="mr-3"
+														size={25}
+													/>
+													Сменить фото
+													<input
+														onChange={(e) => {
+															change_photo(
+																e.target.files[0],
+															);
+															setNewImage(
+																e.target.files[0],
+															);
+															get_user();
+														}}
+														className="absolute invisible"
+														type="file"
+														accept="image/*"
+													/>
+												</label>
+											</li>
+											<hr />
+											<li
+												onClick={handleExit}
+												className="flex items-center w-full h-full hover:bg-slate-400 hover:text-white px-2"
+											>
+												<RiLogoutBoxFill
+													className="mr-3"
+													size={25}
+												/>
+												Выйти
+											</li>
+										</ul>
+									)}
 								</div>
 							</div>
 							<div className="flex gap-6 items-center mt-3 mb-2 xl:flex-col xl:items-start xl:gap-2">
@@ -138,12 +244,40 @@ export default function ProfilePage() {
 									)}
 								</div>
 							</div>
-							<div className="text-white text-xs font-medium leading-[16px] px-2 py-1 rounded bg-dark inline-block">
-								{user.role === "owner" ? "Владелец" : "Пользователь"}
+							<div
+								onClick={() => setRoleSwitch(!roleSwitch)}
+								className="text-white text-xs font-medium leading-[16px]  rounded bg-dark w-28 text-center inline-block relative cursor-pointer"
+							>
+								<div className="p-2">{selected && selected.title}</div>
+
+								{roleSwitch && user.role === "owner" && (
+									<>
+										<hr className="mt-2" />
+										<div className="w-full">
+											{roles.map(
+												(item) =>
+													item.value !== selected.value && (
+														<p
+															className="my-2 hover:bg-slate-600 p-1"
+															key={item.value}
+															onClick={() =>
+																handleStatus(item)
+															}
+														>
+															{item.title}
+														</p>
+													),
+											)}
+										</div>
+									</>
+								)}
 							</div>
 						</div>
 						<ul className="mt-8 flex flex-col gap-3">
-							<UserInfoRow label="Дата рождения" text="—" />
+							<UserInfoRow
+								label="Дата рождения"
+								text={(test && test.date_of_birth) || "--"}
+							/>
 							<UserInfoRow label="Логин" text={user.user} />
 							<UserInfoRow
 								label="Пароль"
@@ -175,33 +309,32 @@ export default function ProfilePage() {
 									changingPassword.state &&
 									(() => {
 										if (changingPassword.newPassword.length >= 5) {
-											change_password("admin", "admin").then(
-												(res) => {
-													if (res?.status === 200) {
-														setAuthData({
-															...authData,
-															password: window.btoa(
-																changingPassword.newPassword,
-															),
-														});
-														setChangingPassword(
-															(prevState) => ({
-																...prevState,
-																state: false,
-																currentPassword:
-																	prevState.newPassword,
-															}),
-														);
-														toast.success(
-															"Пароль успешно изменён",
-														);
-													} else {
-														toast.error(
-															"Новый пароль слишком короткий",
-														);
-													}
-												},
-											);
+											change_password(
+												changingPassword.currentPassword,
+												changingPassword.newPassword,
+											).then((res) => {
+												if (res?.status === 200) {
+													setAuthData({
+														...authData,
+														password: window.btoa(
+															changingPassword.newPassword,
+														),
+													});
+													setChangingPassword((prevState) => ({
+														...prevState,
+														state: false,
+														currentPassword:
+															prevState.newPassword,
+													}));
+													toast.success(
+														"Пароль успешно изменён",
+													);
+												} else {
+													toast.error(
+														"Новый пароль слишком короткий",
+													);
+												}
+											});
 										} else {
 											toast.error("Новый пароль слишком короткий");
 										}

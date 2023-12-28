@@ -12,24 +12,20 @@ export default function Reward({ type, width, height, isInactive }) {
 			<div
 				className={clsx(
 					`flex-middle flex-col rounded-full ${
-						width === 100 && height === 100
-							? "border-[3px]"
-							: "border"
+						width === 100 && height === 100 ? "border-[3px]" : "border"
 					}`,
 					{
-						"bg-[#F7A52B] border-[#D88F21]":
-							type.split("/")[1] === "10",
-						"bg-[#D0DCDE] border-[#ACB6B7]":
-							type.split("/")[1] === "50",
-						"bg-[#F7E22B] border-[#E2CC0D]":
-							type.split("/")[1] === "100",
+						"bg-[#F7A52B] border-[#D88F21]": type.split("/")[1] === "10",
+						"bg-[#D0DCDE] border-[#ACB6B7]": type.split("/")[1] === "50",
+						"bg-[#F7E22B] border-[#E2CC0D]": type.split("/")[1] === "100",
 						"opacity-20": isInactive,
 					},
 				)}
 				style={{
 					width: `${width}px`,
 					height: `${height}px`,
-				}}>
+				}}
+			>
 				<span
 					className={clsx(
 						`${
@@ -42,7 +38,8 @@ export default function Reward({ type, width, height, isInactive }) {
 							"text-[#656565]": type.split("/")[1] === "50",
 							"text-[#6F6022]": type.split("/")[1] === "100",
 						},
-					)}>
+					)}
+				>
 					{type.split("/")[1]}
 				</span>
 				<span
@@ -57,7 +54,8 @@ export default function Reward({ type, width, height, isInactive }) {
 							"text-[#656565]": type.split("/")[1] === "50",
 							"text-[#6F6022]": type.split("/")[1] === "100",
 						},
-					)}>
+					)}
+				>
 					дней
 				</span>
 			</div>
@@ -73,14 +71,16 @@ export default function Reward({ type, width, height, isInactive }) {
 				style={{
 					width: `${width}px`,
 					height: `${height}px`,
-				}}>
+				}}
+			>
 				{width === 75 && height === 75 && (
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						width="75"
 						height="75"
 						viewBox="0 0 75 75"
-						fill="none">
+						fill="none"
+					>
 						<rect
 							x="1"
 							y="1"
@@ -97,7 +97,8 @@ export default function Reward({ type, width, height, isInactive }) {
 								y1="75"
 								x2="4.24097"
 								y2="92.0482"
-								gradientUnits="userSpaceOnUse">
+								gradientUnits="userSpaceOnUse"
+							>
 								<stop stop-color="#24E19D" />
 								<stop offset="1" stop-color="#2EBFDF" />
 							</linearGradient>
@@ -110,7 +111,8 @@ export default function Reward({ type, width, height, isInactive }) {
 						width="32"
 						height="32"
 						viewBox="0 0 32 32"
-						fill="none">
+						fill="none"
+					>
 						<rect
 							x="0.35"
 							y="0.35"
@@ -127,7 +129,8 @@ export default function Reward({ type, width, height, isInactive }) {
 								y1="32"
 								x2="1.80948"
 								y2="39.2739"
-								gradientUnits="userSpaceOnUse">
+								gradientUnits="userSpaceOnUse"
+							>
 								<stop stop-color="#24E19D" />
 								<stop offset="1" stop-color="#2EBFDF" />
 							</linearGradient>
@@ -136,9 +139,7 @@ export default function Reward({ type, width, height, isInactive }) {
 				)}
 				<img
 					className="max-w-[70%] max-h-[70%] absolute"
-					src={`/images/jewelries/${
-						type.split("/")[1]
-					}.png`}
+					src={`/images/jewelries/${type.split("/")[1]}.png`}
 					alt="Драгоценный камень"
 				/>
 			</div>

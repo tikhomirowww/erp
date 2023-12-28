@@ -49,7 +49,7 @@ export default function PeriodsPage() {
 				icon="plus"
 				onClick={() => navigate("/platform/period/add")}
 			/>
-			<TablePeriods data={periods} />
+			<TablePeriods data={periods.sort((a, b) => a.id - b.id)} />
 		</section>
 	);
 }
